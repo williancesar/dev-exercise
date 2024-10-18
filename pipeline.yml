@@ -1,0 +1,49 @@
+﻿name: .NET Core CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      
+      # Restore and build the service project
+      - name: Restore dependencies for the service
+        run: dotnet restore src/ProductService.csproj
+
+      - name: Build the service
+        run: dotnet build src/ProductService.csproj --no-restore --configuration Release
+      
+      # Restore, build, and run unit tests
+      - name: Restore dependencies for unit tests
+        run: dotnet restore test/UnitTests.csproj
+
+      - name: Build unit tests
+        run: dotnet build test/UnitTests.csproj --no-restore --configuration Release
+
+      - name: Run unit tests
+        run: dotnet test test/UnitTests.csproj --no-build --verbosity normal
+      
+      # Restore, build, and run integration tests
+      - name: Restore dependencies for integration tests
+        run: dotnet restore test/IntegrationTests.csproj
+
+      - name: Build integration tests
+        run: dotnet build test/IntegrationTests.csproj --no-restore --configuration Release
+
+      - name: Run integration tests
+        run: dotnet test test/IntegrationTests.csproj --no-build --verbosity normal

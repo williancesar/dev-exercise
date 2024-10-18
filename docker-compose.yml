@@ -1,0 +1,22 @@
+﻿services:
+  product-service:
+    build:
+      context: .   # Points to the service folder
+      dockerfile: ./src/ProductService/Dockerfile  # References the Dockerfile at the root
+    ports:
+      - "8080:80"
+    depends_on:
+      - mongo
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MONGO_CONNECTION_STRING=mongodb://mongo:27017
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
