@@ -1,0 +1,18 @@
+@ProductService_HostAddress = http://localhost:8080
+
+### Create a new product
+POST {{ProductService_HostAddress}}/products
+Content-Type: application/json
+
+{
+  "description": "Sample Product",
+  "price": 19.99,
+  "stock": 100,
+  "categories": [
+    { "id": "b23863ff-8d97-4168-a9c8-a3fd65e7de89", "name": "Category 1" },
+    { "id": "b23863ff-8d97-4168-a9c8-a3fd65e7de89", "name": "Category 2" }
+  ]
+}
+
+### Get a product by ID
+GET {{ProductService_HostAddress}}/products/asdsadasd
