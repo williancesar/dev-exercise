@@ -36,7 +36,7 @@ jobs:
         run: dotnet build test/UnitTests/UnitTests.csproj --no-restore --configuration Release
 
       - name: Run unit tests
-        run: dotnet test test/UnitTests/UnitTests.csproj --no-build --verbosity normal
+        run: dotnet test test/UnitTests/UnitTests.csproj --no-build --verbosity detailed
       
       # Restore, build, and run integration tests
       - name: Restore dependencies for integration tests
