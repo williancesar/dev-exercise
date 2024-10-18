@@ -26,24 +26,24 @@ jobs:
         run: dotnet restore src/ProductService.csproj
 
       - name: Build the service
-        run: dotnet build src/ProductService.csproj --no-restore --configuration Release
+        run: dotnet build src/ProductService/ProductService.csproj --no-restore --configuration Release
       
       # Restore, build, and run unit tests
       - name: Restore dependencies for unit tests
-        run: dotnet restore test/UnitTests.csproj
+        run: dotnet restore test/UnitTests/UnitTests.csproj
 
       - name: Build unit tests
-        run: dotnet build test/UnitTests.csproj --no-restore --configuration Release
+        run: dotnet build test/UnitTests/UnitTests.csproj --no-restore --configuration Release
 
       - name: Run unit tests
-        run: dotnet test test/UnitTests.csproj --no-build --verbosity normal
+        run: dotnet test test/UnitTests/UnitTests.csproj --no-build --verbosity normal
       
       # Restore, build, and run integration tests
       - name: Restore dependencies for integration tests
-        run: dotnet restore test/IntegrationTests.csproj
+        run: dotnet restore test/IntegrationTests/IntegrationTests.csproj
 
       - name: Build integration tests
-        run: dotnet build test/IntegrationTests.csproj --no-restore --configuration Release
+        run: dotnet build test/IntegrationTests/IntegrationTests.csproj --no-restore --configuration Release
 
       - name: Run integration tests
-        run: dotnet test test/IntegrationTests.csproj --no-build --verbosity normal
+        run: dotnet test test/IntegrationTests/IntegrationTests.csproj --no-build --verbosity normal
